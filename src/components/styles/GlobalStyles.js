@@ -9,7 +9,7 @@ export const GlobalStyles = createGlobalStyle`
 	}
 
 	body {
-		font-family: 'Bahnschrift', sans-serif;
+		font-family: 'Rubik', 'Bahnschrift', sans-serif;
 		background: ${({theme}) => theme.background};
 		color: ${({theme}) => theme.light};
 	}
