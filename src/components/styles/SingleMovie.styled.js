@@ -6,7 +6,6 @@ export const Movie = styled.div`
 /*	border: 1px solid ${({theme}) => theme.accent}; */
 	border-radius: 0.4rem;
 	background: ${({theme}) => theme.movieBackground};
-	position: relative;
 	transition: 0.3s ease;
 	cursor: pointer;
 	text-align: center;
@@ -17,10 +16,16 @@ export const Movie = styled.div`
 	}
 `;
 
-export const Poster = styled.img`
+export const PosterContainer = styled.div`
 	max-width: 100%;
 	border-radius: 0.4rem;
 	margin-bottom: 0.5rem;
+	position: relative;
+`;
+
+export const Poster = styled.img`
+	max-width: 100%;
+	border-radius: 0.4rem;
 `;
 
 export const Bookmark = styled.span`
@@ -30,7 +35,7 @@ export const Bookmark = styled.span`
 	line-height: 2.5rem;
 	background: ${({theme}) =>theme.movieBackground};
 	position: absolute;
-	top: 60%;
+	bottom: 0.8rem;
 	right: 0.5rem;
 	color: ${({theme}) =>theme.light};
 

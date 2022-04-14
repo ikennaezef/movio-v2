@@ -28,6 +28,7 @@ const Trending = () => {
 		<>
 			<Container>
 				<h1> <AiTwotoneFire /> Trending This week</h1>
+				<p>These are the most popular movies and TV shows this week</p>
 				<Grid>
 				{
 					results.map(movie => <SingleMovie key={movie.id} movie={movie}/>)
