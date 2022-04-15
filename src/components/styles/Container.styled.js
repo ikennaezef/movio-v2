@@ -26,3 +26,8 @@ export const Container = styled.div`
 		padding: 6rem 1rem 5rem;
 	}
 `;
+
+export const Error = styled.p`
+	margin-top: 4rem;
+	font-size: 1rem;
+`;

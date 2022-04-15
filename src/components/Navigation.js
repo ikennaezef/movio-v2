@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
-
 import { StyledNav, LinksContainer, NavLink } from './styles/Navigation.styled';
-import { Container } from './styles/Container.styled';
 import { Link, useLocation } from 'react-router-dom';
 
 import { AiTwotoneFire } from 'react-icons/ai';
