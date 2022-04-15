@@ -2,7 +2,7 @@ import {Movie, PosterContainer, Poster, Bookmark, Badge, MovieName, Type, Date} 
 
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 
-const SingleMovie = ({movie}) => {
+const SingleMovie = ({movie, type}) => {
 
 	const getYear = (year) => {
 		return year.slice(0,4);
@@ -23,8 +23,8 @@ const SingleMovie = ({movie}) => {
 				<Poster src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.original_name} />
 				<Bookmark> <BsBookmark /> </Bookmark>
 			</PosterContainer>
-			<MovieName>{shortenString(movie.original_name || movie.title) }</MovieName>
-			<Type>{movie.media_type==='tv' ? 'TV Show' : 'Movie'}</Type>
+			<MovieName>{shortenString(movie.name || movie.title) }</MovieName>
+			<Type>{type}</Type>
 			<Date>{getYear(movie?.first_air_date || movie?.release_date) }</Date>
 		</Movie>
 	)

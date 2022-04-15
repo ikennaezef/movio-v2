@@ -1,5 +1,4 @@
 import { StyledHeader } from './styles/Header.styled';
-import { Container } from './styles/Container.styled';
 import { Link } from 'react-router-dom';
 
 import logo from '../images/default-monochrome.svg';
@@ -7,11 +6,11 @@ import logo from '../images/default-monochrome.svg';
 const Header = () => {
 	return (
 		<StyledHeader>
-			<Container>
+			<div>
 				<Link to="/">
 					<img src={logo} alt="Movio Logo" />
 				</Link>
-			</Container>
+			</div>
 		</StyledHeader>
 	)
 }

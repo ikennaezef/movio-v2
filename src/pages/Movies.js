@@ -8,7 +8,7 @@ import {Grid} from '../components/styles/Grid.styled';
 
 import SingleMovie from '../components/SingleMovie';
 
-import { RiMovie2Fill } from 'react-icons/ri'
+import { BiMoviePlay } from 'react-icons/bi';
 
 
 const Movies = () => {
@@ -29,11 +29,11 @@ const Movies = () => {
 	return (
 		<>
 			<Container>
-				<h1> <RiMovie2Fill /> Popular Movies</h1>
-				<p>These are the most popular movies and TV shows this week</p>
+				<h1> <BiMoviePlay /> Popular Movies</h1>
+				<p>Discover Popular Movies that you'd love</p>
 				<Grid>
 				{
-					results.map(movie => <SingleMovie key={movie.id} movie={movie}/>)
+					results.map(movie => <SingleMovie key={movie.id} movie={movie} type="Movie"/>)
 				}
 				</Grid>
 			</Container>

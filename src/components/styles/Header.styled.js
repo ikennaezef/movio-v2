@@ -11,6 +11,12 @@ export const StyledHeader = styled.header`
 	z-index: 100;
 	background: ${({theme}) => theme.background};
 
+	& > div {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
 	img {
 		height: 2.8rem;
 	}

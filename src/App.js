@@ -5,6 +5,7 @@ import { GlobalStyles } from './components/styles/GlobalStyles'
 import theme from './theme';
 
 import Header from './components/Header';
+import Navigation from './components/Navigation';
 
 import TrendingPage from './pages/Trending';
 import MoviesPage from './pages/Movies';
@@ -27,6 +28,7 @@ function App() {
             <Route path="/bookmarks" element={ <BookmarksPage /> } />
             <Route path="/video/:id" element={ <SinglePage /> } />
           </Routes>
+          <Navigation />
       </ThemeProvider>
     </Router>
   );

@@ -18,11 +18,11 @@ const Trending = () => {
 		const fetchData = async () => {
 			const request = await axios.get(requests.fetchTrending);
 			setResults(request.data.results);
-			console.log(results);
+			console.log(request.data.results);
 			return request;
 		}
 		fetchData();
-	}, [ requests.fetchTrending ])
+	}, [ ])
 
 	return ( 
 		<>
@@ -31,7 +31,7 @@ const Trending = () => {
 				<p>These are the most popular movies and TV shows this week</p>
 				<Grid>
 				{
-					results.map(movie => <SingleMovie key={movie.id} movie={movie}/>)
+					results.map(movie => <SingleMovie key={movie.id} movie={movie} type={movie.media_type==='tv' ? 'TV Show' : 'Movie'}/>)
 				}
 				</Grid>
 			</Container>
