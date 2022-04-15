@@ -20,7 +20,7 @@ const SingleMovie = ({movie, type}) => {
 		<Movie>
 			<PosterContainer>
 				<Badge highlyRated={movie.vote_average >= 7} >{movie.vote_average}</Badge>
-				<Poster src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.original_name} />
+				<Poster src={movie.poster_path === null ? 'https://www.movienewz.com/img/films/poster-holder.jpg' : `https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.original_name} />
 				<Bookmark> <BsBookmark /> </Bookmark>
 			</PosterContainer>
 			<MovieName>{shortenString(movie.name || movie.title) }</MovieName>
