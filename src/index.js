@@ -5,10 +5,12 @@ import reportWebVitals from './reportWebVitals';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import bookmarkReducer from './features/bookmarks';
+import genreReducer from './features/genres';
 
 const store = configureStore({
   reducer: {
-    bookmarks: bookmarkReducer
+    bookmarks: bookmarkReducer,
+    genre: genreReducer
   },
 })
 

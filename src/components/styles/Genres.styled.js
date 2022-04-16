@@ -5,6 +5,7 @@ export const GenresContainer = styled.div`
 `;
 
 export const GenreTablet = styled.span`
+	display: inline-block;
 	border-radius: 0.5rem;
 	padding: 0.5rem;
 	font-size: 0.9rem;

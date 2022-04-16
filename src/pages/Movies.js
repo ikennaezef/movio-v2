@@ -19,8 +19,6 @@ const Movies = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 
-	const [genre, setGenre] = useState(null);
-
 	const genresList = [
 		{ genre: 'Action', id: 28 },
 		{ genre: 'Comedy', id: 35 },
@@ -56,7 +54,7 @@ const Movies = () => {
 				<p>Discover Popular Movies that you'd love</p>
 				{ loading && <Loader /> }
 				{ error && <Error>{ error }</Error> }				
-				<Genres genreList={genresList} setGenre={setGenre} />
+				<Genres genreList={genresList} />
 				<Grid>
 				{
 					results.map(movie => <SingleMovie key={movie.id} movie={movie} type="Movie"/>)
