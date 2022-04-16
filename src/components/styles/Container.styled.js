@@ -28,6 +28,6 @@ export const Container = styled.div`
 `;
 
 export const Error = styled.p`
-	margin-top: 4rem;
+	margin-top: 5rem;
 	font-size: 1rem;
 `;

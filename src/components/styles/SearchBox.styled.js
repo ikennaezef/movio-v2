@@ -5,6 +5,11 @@ export const SearchBox = styled.form`
 	border-radius: 0.4rem;
 	margin: 0.5rem 0 1rem;
 	display: flex;
+	width: 70%;
+
+	@media (max-width:  769px) {
+		width: 100%;
+	}
 `;
 
 export const Input = styled.input`

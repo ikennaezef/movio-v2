@@ -19,11 +19,20 @@ export const LinksContainer = styled.div`
 `;
 
 export const NavLink = styled.div`
+	margin: 0 0.2rem;
+	max-width: 100%;
+
 	a {
 		display: inline-block;
 		font-size: 1rem;
 		text-align: center;
 		text-decoration: none;
 		color: ${({theme, active})=> active ? theme.accent : theme.light };
+	}
+
+	@media (max-width: 376px) {
+		a {
+			font-size: 0.8rem;
+		}
 	}
 `;
