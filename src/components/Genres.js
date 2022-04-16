@@ -1,36 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import { setGenre } from '../features/genres';
+import { setGenre, resetGenre } from '../features/genres';
 import { useDispatch } from 'react-redux';
 
 import { GenresContainer, GenreTablet } from './styles/Genres.styled';
 
-const Genres = ({ genreList }) => {
+const Genres = ({ genreList, setGen }) => {
 
 	const dispatch = useDispatch();
 
-	const [selectedGenre, setSelectedGenre] = useState(null);
+	const [selectedGenre, setSelectedGenre] = useState({ genre: '', id: 0 });
 
 	const toggleGenre = (gen) => {
-		if (selectedGenre === gen ) {
-			setSelectedGenre(null);
-			dispatch(setGenre(selectedGenre));
-			console.log('Toggled');
+		const initialValue = { genre: '', id: 0 };
+		if (selectedGenre.id === gen.id ) {
+			setSelectedGenre(initialValue);
+			return dispatch(resetGenre());
 		} else {
 			setSelectedGenre(gen);
-			dispatch(setGenre(selectedGenre));
-			console.log('Added');
+			return dispatch(setGenre(gen));
 		}
 	}
 
-	// useEffect(() => {
-	// 	setGenre(selectedGenre);	
-	// 	console.log(selectedGenre);
-	// }, [selectedGenre, setGenre])
-
 	return (
 		<GenresContainer>
-			{genreList.map(g => <GenreTablet key={g.id} onClick={() => toggleGenre(g)} active={selectedGenre == g} > {g.genre} </GenreTablet> )}
+			{genreList.map(g => <GenreTablet key={g.id} onClick={() => toggleGenre(g)} active={selectedGenre.id === g.id} > {g.genre} </GenreTablet> )}
 		</GenresContainer>
 	)
 }

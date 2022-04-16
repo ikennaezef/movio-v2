@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const GenresContainer = styled.div`
-	
+	margin-bottom: 2rem;
 `;
 
 export const GenreTablet = styled.span`

@@ -1,15 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialValue = { genre: '', id: 0 };
 
 export const genreSlice = createSlice({
 	name: "genre",
-	initialState: { genre: null },
+	initialState: { value: initialValue },
 	reducers: {
 		setGenre: (state, action) => {
-			state.genre = action.payload
+			state.value = action.payload;
+		},
+		resetGenre: (state) => {
+			state.value = initialValue;
 		}
 	}
 })
 
-export const { setGenre } = genreSlice.actions;
+export const { setGenre, resetGenre } = genreSlice.actions;
 
 export default genreSlice.reducer;
