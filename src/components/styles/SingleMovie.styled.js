@@ -3,10 +3,9 @@ import styled from 'styled-components';
 export const Movie = styled.div`
 	padding: 0.2rem 0.2rem 0.5rem;
 	max-width: 100%;
-/*	border: 1px solid ${({theme}) => theme.accent}; */
 	border-radius: 0.4rem;
 	background: ${({theme}) => theme.movieBackground};
-	transition: 0.3s ease;
+	transition: 0.4s ease;
 	cursor: pointer;
 	text-align: center;
 
@@ -40,7 +39,7 @@ export const Bookmark = styled.span`
 	color: ${({theme}) =>theme.light};
 
 	&:hover {
-		background: ${({theme}) =>theme.accent};
+		background: ${({theme}) =>theme.darkBg};
 	}
 `;
 

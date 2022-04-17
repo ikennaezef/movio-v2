@@ -8,32 +8,43 @@ import {Grid} from '../components/styles/Grid.styled';
 
 import Loader from '../components/Loader';
 import SingleMovie from '../components/SingleMovie';
+import ReactPaginate from 'react-paginate';
 
 import { AiTwotoneFire } from 'react-icons/ai'
 
 const Trending = () => {
 
 	const [results, setResults] = useState([]);
+	const [pageNumber, setPageNumber] = useState(1);
+	const [totalPages, setTotalPages] = useState();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 
-	useEffect(() => {	
-		setLoading(true);	
-		const fetchData = async () => {
-			try{
-				setError(null);
-				const request = await axios.get(requests.fetchTrending);
-				setResults(request.data.results);
-				setLoading(false);
-				return request;
-			} catch(err) {
-				setError('It seems like an error occured. Please check your internet connection and refresh.');
-				setLoading(false);
-			}			
-		}
-		
+
+	const fetchData = async () => {
+		setLoading(true);
+		try{
+			setError(null);
+			const { data } = await axios.get(`${requests.fetchTrending}&page=${pageNumber}`);
+			setResults(data.results);
+			setTotalPages(data.total_pages);
+			setLoading(false);
+			return data;
+		} catch(err) {
+			setError('It seems like an error occured. Please check your internet connection and refresh.');
+			setLoading(false);
+		}			
+	}
+
+	useEffect(() => {
+		window.scroll(0, 0);
 		fetchData();
-	}, [ ])
+	}, [ pageNumber ])
+
+	const changePage = ({ selected }) => {
+		setPageNumber(selected + 1);
+	}
+
 
 	return ( 
 		<>
@@ -47,6 +58,19 @@ const Trending = () => {
 					results.map(movie => <SingleMovie key={movie.id} movie={movie} type={movie.media_type==='tv' ? 'TV Show' : 'Movie'}/>)
 				}
 				</Grid>
+				{ !error && 
+					<ReactPaginate
+						previousLabel={"Prev"}
+						nextLabel={"Next"}
+						pageCount={ totalPages > 15 ? 15 : totalPages }
+						onPageChange={changePage}
+						containerClassName={"paginationBtns"}
+						previousLinkClassName={"prevBtn"}
+						nextLinkClassName={"nextBtn"}
+						disabledClassName={"paginationDisabled"}
+						activeClassName={"paginationActive"}
+					 />
+				 }
 			</Container>
 		</>
 	)

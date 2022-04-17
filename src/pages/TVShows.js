@@ -12,6 +12,7 @@ import {Grid} from '../components/styles/Grid.styled';
 import Loader from '../components/Loader';
 import Genres from '../components/Genres';
 import SingleMovie from '../components/SingleMovie';
+import ReactPaginate from 'react-paginate';
 
 import { FaDesktop } from 'react-icons/fa';
 
@@ -21,6 +22,8 @@ const TVShows = () => {
 	const gen = useSelector((state) => state.genre.value);
 
 	const [results, setResults] = useState([]);
+	const [pageNumber, setPageNumber] = useState(1);
+	const [totalPages, setTotalPages] = useState();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 
@@ -42,23 +45,33 @@ const TVShows = () => {
 		dispatch(resetGenre());
 	}, [ dispatch ])
 
+	const fetchData = async () => {
+		setLoading(true);
+		try {
+			setError(null);
+			const { data } = gen.id === 0 ? await axios.get(`${requests.fetchAllSeries}&page=${pageNumber}`) : await axios.get(`${requests.fetchSeriesWithGenre}${gen.id}&page=${pageNumber}`);
+			setResults(data.results);
+			setTotalPages(data.total_pages);
+			setLoading(false);
+			return data;
+		} catch (err) {
+			setError('It seems like an error occured. Please check your internet connection and refresh.');
+			setLoading(false);
+		}			
+	}
+
 	useEffect(() => {
-		setLoading(true);		
-		const fetchData = async () => {
-			try {
-				const request = gen.id === 0 ? await axios.get(requests.fetchAllSeries) : await axios.get(requests.fetchSeriesWithGenre + gen.id);
-				console.log(request);
-				setResults(request.data.results);
-				setLoading(false);
-				return request;
-			} catch (err) {
-				setError('It seems like an error occured. Please check your internet connection and refresh.');
-				setLoading(false);
-			}
-			
-		}
+		window.scroll(0, 0);
 		fetchData();
+	}, [ gen, pageNumber ])
+
+	useEffect(()=> {
+		setPageNumber(1);
 	}, [ gen ])
+
+	const changePage = ({ selected }) => {
+		setPageNumber(selected + 1);
+	}
 
 	return (
 		<>
@@ -72,6 +85,19 @@ const TVShows = () => {
 					results.map(movie => <SingleMovie key={movie.id} movie={movie} type="TV Show" />)
 				}
 				</Grid>
+				{ !error && 
+					<ReactPaginate
+						previousLabel={"Prev"}
+						nextLabel={"Next"}
+						pageCount={ totalPages > 15 ? 15 : totalPages }
+						onPageChange={changePage}
+						containerClassName={"paginationBtns"}
+						previousLinkClassName={"prevBtn"}
+						nextLinkClassName={"nextBtn"}
+						disabledClassName={"paginationDisabled"}
+						activeClassName={"paginationActive"}
+					 />
+				 }
 			</Container>
 		</>
 	)

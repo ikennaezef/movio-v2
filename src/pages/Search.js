@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from '../axios';
 import requests from '../requests';
 
-import {Container} from '../components/styles/Container.styled';
+import {Container, Error} from '../components/styles/Container.styled';
 import {Grid} from '../components/styles/Grid.styled';
 import {SearchBox, Input, Button} from '../components/styles/SearchBox.styled';
 
@@ -17,14 +17,21 @@ const Search = () => {
 	const [search, setSearch] = useState('');
 	const [results, setResults] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
 
 	const fetchData = async () => {
 		setResults([]);
 		setLoading(true);
-		const {data} = await axios.get(`${requests.search}${search}`);
-		setResults(data.results.filter(item => item.media_type !== 'person' ));
-		setLoading(false);
-		return data;
+		try {
+			const {data} = await axios.get(`${requests.search}${search}`);
+			setResults(data.results.filter(item => item.media_type !== 'person' ));
+			setLoading(false);
+			return data;
+		} catch	(err) {
+			setError('It seems like an error occured. Please check your internet connection and refresh.');
+			setLoading(false);
+		}
+		
 	}
 		
 
@@ -46,6 +53,7 @@ const Search = () => {
 					<Button onClick={handleSearch} > < FaSearch/> </Button>
 				</SearchBox>
 				{ loading && <Loader/> }
+				{ error && <Error> {error} </Error> }
 				<Grid>
 				{
 					results.map(movie => <SingleMovie key={movie.id} movie={movie} type={movie.media_type==='tv' ? 'TV Show' : 'Movie'} />)

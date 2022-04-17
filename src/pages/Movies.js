@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import axios from '../axios';
 import requests from '../requests';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { resetGenre } from '../features/genres';
 
 import {Container, Error} from '../components/styles/Container.styled';
 import {Grid} from '../components/styles/Grid.styled';
@@ -11,15 +12,19 @@ import {Grid} from '../components/styles/Grid.styled';
 import Loader from '../components/Loader';
 import Genres from '../components/Genres';
 import SingleMovie from '../components/SingleMovie';
+import ReactPaginate from 'react-paginate';
 
 import { BiMoviePlay } from 'react-icons/bi';
 
 
 const Movies = () => {
 
+	const dispatch = useDispatch();
 	const gen = useSelector((state) => state.genre.value);
 
 	const [results, setResults] = useState([]);
+	const [pageNumber, setPageNumber] = useState(1);
+	const [totalPages, setTotalPages] = useState();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 
@@ -40,21 +45,36 @@ const Movies = () => {
 	]
 
 	useEffect(() => {
+		dispatch(resetGenre());
+	}, [ dispatch ])
+
+	const fetchData = async () => {
 		setLoading(true);
-		const fetchData = async () => {
-			try {
-				setError(null);
-				const request = gen.id === 0 ? await axios.get(requests.fetchAllMovies) : await axios.get(requests.fetchMovieWithGenre + gen.id);
-				setResults(request.data.results);
-				setLoading(false);
-				return request;
-			} catch (err) {
-				setError('It seems like an error occured. Please check your internet connection and refresh.');
-				setLoading(false);
-			}			
-		}
+		try {
+			setError(null);
+			const { data } = gen.id === 0 ? await axios.get(`${requests.fetchAllMovies}&page=${pageNumber}`) : await axios.get(`${requests.fetchMovieWithGenre}${gen.id}&page=${pageNumber}`);
+			setResults(data.results);
+			setTotalPages(data.total_pages);
+			setLoading(false);
+			return data;
+		} catch (err) {
+			setError('It seems like an error occured. Please check your internet connection and refresh.');
+			setLoading(false);
+		}			
+	}
+
+	useEffect(() => {
+		window.scroll(0, 0);
 		fetchData();
+	}, [ gen, pageNumber ])
+
+	useEffect(()=> {
+		setPageNumber(1);
 	}, [ gen ])
+
+	const changePage = ({ selected }) => {
+		setPageNumber(selected + 1);
+	}
 
 	return (
 		<>
@@ -68,6 +88,19 @@ const Movies = () => {
 					results.map(movie => <SingleMovie key={movie.id} movie={movie} type="Movie"/>)
 				}
 				</Grid>
+				{ !error && 
+					<ReactPaginate
+						previousLabel={"Prev"}
+						nextLabel={"Next"}
+						pageCount={ totalPages > 15 ? 15 : totalPages }
+						onPageChange={changePage}
+						containerClassName={"paginationBtns"}
+						previousLinkClassName={"prevBtn"}
+						nextLinkClassName={"nextBtn"}
+						disabledClassName={"paginationDisabled"}
+						activeClassName={"paginationActive"}
+					 />
+				 }
 			</Container>
 		</>
 	)
