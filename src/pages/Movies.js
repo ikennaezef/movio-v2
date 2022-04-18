@@ -85,7 +85,7 @@ const Movies = () => {
 				{ error ? <Error>{ error }</Error> : <Genres genreList={genresList} /> }
 				<Grid>
 				{
-					results.map(movie => <SingleMovie key={movie.id} movie={movie} type="Movie"/>)
+					results.map(movie => <SingleMovie key={movie.id} movie={movie} type="movie"/>)
 				}
 				</Grid>
 				{ !error && 

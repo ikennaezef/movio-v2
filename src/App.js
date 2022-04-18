@@ -27,7 +27,7 @@ function App() {
             <Route path="/tvshows" element={ <TVShowsPage /> } />
             <Route path="/search" element={ <SearchPage /> } />
             <Route path="/bookmarks" element={ <BookmarksPage /> } />
-            <Route path="/video/:id" element={ <SinglePage /> } />
+            <Route path="/:type/:id" element={ <SinglePage /> } />
           </Routes>
           <Navigation />
       </ThemeProvider>

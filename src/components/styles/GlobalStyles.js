@@ -34,20 +34,14 @@ export const GlobalStyles = createGlobalStyle`
 	  padding: 0.5rem;
 	  margin: 0.2rem;
 	  border-radius: 0.4rem;
-	  border: 1px solid ${({theme}) => theme.accent};
+	  background-color: ${({theme}) => theme.movieBackground};
 	  cursor: pointer;
 	  transition: 0.3s ease;
 	}
 
-	.paginationBtns a:hover {
+	.paginationBtns a:hover, 
+	 .paginationActive a {
 	  color: ${({theme}) => theme.background};
 	  background-color: ${({theme}) => theme.accent};
 	}
-
-	.paginationActive a {
-	  color: ${({theme}) => theme.background};
-	  background-color: ${({theme}) => theme.accent};
-	}
-
-
 `

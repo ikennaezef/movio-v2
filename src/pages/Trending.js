@@ -55,7 +55,7 @@ const Trending = () => {
 				{ error && <Error>{ error }</Error> }
 				<Grid>
 				{
-					results.map(movie => <SingleMovie key={movie.id} movie={movie} type={movie.media_type==='tv' ? 'TV Show' : 'Movie'}/>)
+					results.map(movie => <SingleMovie key={movie.id} movie={movie} type={movie.media_type}/>)
 				}
 				</Grid>
 				{ !error && 

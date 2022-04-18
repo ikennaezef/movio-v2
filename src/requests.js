@@ -9,6 +9,10 @@ const requests = {
 	search: `/search/multi?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=`,
 }
 
+export const fetchSingleMovie = (type, id) => {
+	return `/${type}/${id}?api_key=${API_KEY}&language=en-US&append_to_response=videos,credits,similar`
+}
+
 export default requests;
 
 
