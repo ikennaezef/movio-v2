@@ -4,9 +4,11 @@ const theme = {
 	darkBg: '#00131b',
 	movieBackground: '#003440',
 	light: '#efe',
+	faded: '#9a9',
 	shadow: '0 0 5px rgba(0, 0, 0, 0.5)',
 	badgeRed: '#f24',
 	badgeBlue: '#15f',
+	youTube: '#f23'
 }
 
 export default theme;

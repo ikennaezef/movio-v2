@@ -25,6 +25,7 @@ const Search = () => {
 		try {
 			const {data} = await axios.get(`${requests.search}${search}`);
 			setResults(data.results.filter(item => item.media_type !== 'person' ));
+			console.log(data.results.filter(item => item.media_type !== 'person' ));
 			setLoading(false);
 			return data;
 		} catch	(err) {

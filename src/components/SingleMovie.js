@@ -9,7 +9,7 @@ const SingleMovie = ({movie, type}) => {
 	const navigate = useNavigate();
 
 	const getYear = (year) => {
-		return year.slice(0,4);
+		return year.slice(0,4) || year;
 	}
 
 	const shortenString = (string) => {
@@ -33,7 +33,7 @@ const SingleMovie = ({movie, type}) => {
 			</PosterContainer>
 			<MovieName>{shortenString(movie.name || movie.title) }</MovieName>
 			<Type>{type === 'tv' ? 'TV Show' : 'Movie' }</Type>
-			<Date>{getYear(movie?.first_air_date || movie?.release_date) }</Date>
+			<Date>{ getYear(movie.release_date || movie.first_air_date ) }</Date>
 		</Movie>
 	)
 }
