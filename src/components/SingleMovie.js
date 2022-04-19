@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom'
 
 import {Movie, PosterContainer, Poster, Bookmark, Badge, MovieName, Type, Date} from './styles/SingleMovie.styled'
 
+import { noPoster, img_500 } from '../config/config';
+
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 
 const SingleMovie = ({movie, type}) => {
@@ -30,7 +32,7 @@ const SingleMovie = ({movie, type}) => {
 		<Movie onClick={selectMovie} >
 			<PosterContainer>
 				<Badge highlyRated={movie.vote_average >= 7} >{movie.vote_average}</Badge>
-				<Poster src={movie.poster_path === null ? 'https://www.movienewz.com/img/films/poster-holder.jpg' : `https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.original_name} />
+				<Poster src={movie.poster_path === null ? noPoster : `${img_500}${movie.poster_path}`} alt={movie.original_name} />
 				<Bookmark> <BsBookmark /> </Bookmark>
 			</PosterContainer>
 			<MovieName>{shortenString(movie.name || movie.title) }</MovieName>

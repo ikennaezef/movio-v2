@@ -2,10 +2,7 @@ import styled from 'styled-components';
 
 const LoaderContainer = styled.div`
 	background: ${({theme}) => theme.background};
-	/*position: fixed;
-	top: 0;
-	left: 0;*/
-	height: 30vh;
+	height: 60vh;
 	width: 100%;
 	display: flex;
 	align-items: center;
