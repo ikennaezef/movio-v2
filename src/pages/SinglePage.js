@@ -70,7 +70,7 @@ const SinglePage = () => {
 						<MovieDetails>
 							<MovieName> {movie.title || movie.name} </MovieName>
 							{ movie.tagline && <Tagline>{movie.tagline}</Tagline> }
-							<FadedText> {type === 'tv' ? 'TV Show' : 'Movie'} - {movie.status !== 'Released' ? 'Coming Soon' : type === 'movie' ? movie.runtime + ' mins' : movie.number_of_seasons + ' seasons' }  </FadedText>
+							<FadedText> {type === 'tv' ? 'TV Show' : 'Movie'} - {(movie.status === 'Released' || movie.status === 'Returning Series') ? type === 'movie' ? movie.runtime + ' mins' : movie.number_of_seasons + ' seasons' : 'Coming Soon' }  </FadedText>
 							<FadedText style={{marginBottom: 20}} >  {(movie.release_date || movie.first_air_date) && getYear(movie.release_date || movie.first_air_date)}</FadedText>
 							{ movie.genres.map(gen => <Pill key={gen.id} > {gen.name} </Pill>) }
 							<Plot>{movie.overview}</Plot>
