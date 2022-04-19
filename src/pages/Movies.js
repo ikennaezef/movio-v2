@@ -84,7 +84,7 @@ const Movies = () => {
 				{ loading && <Loader /> }
 				{ error ? <Error>{ error }</Error> : <Genres genreList={genresList} /> }
 				<Grid>
-				{
+				{ results &&
 					results.map(movie => <SingleMovie key={movie.id} movie={movie} type="movie"/>)
 				}
 				</Grid>

@@ -33,7 +33,7 @@ const SingleMovie = ({movie, type}) => {
 			</PosterContainer>
 			<MovieName>{shortenString(movie.name || movie.title) }</MovieName>
 			<Type>{type === 'tv' ? 'TV Show' : 'Movie' }</Type>
-			<Date>{ getYear(movie.release_date || movie.first_air_date ) }</Date>
+			<Date>{ (movie.release_date || movie.first_air_date) && getYear(movie.release_date || movie.first_air_date) }</Date>
 		</Movie>
 	)
 }

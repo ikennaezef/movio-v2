@@ -8,6 +8,10 @@ export const StyledNav = styled.nav`
 	left: 0;
 	width: 100%;
 	z-index: 100;
+
+	@media (max-width: 370px) {
+		padding: 1rem 0.5rem;
+	}
 `;
 
 export const LinksContainer = styled.div`
