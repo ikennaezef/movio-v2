@@ -33,10 +33,9 @@ const SinglePage = () => {
 			setError(null);
 			const { data } = await axios.get(fetchSingleMovie(type, id));
 			setMovie(data);
-			setVideos(data.videos.results.filter(v => v.type ==="Trailer"));
+			setVideos(data.videos.results.filter(v => v.type === ("Trailer" || "Teaser")));
 			setActors(data.credits.cast);
-			setSimilar(data.similar.results.slice(0,5));
-			console.log(data);
+			setSimilar(data.similar.results.slice(0,9));
 			setLoading(false);
 			return data;
 		} catch(err) {

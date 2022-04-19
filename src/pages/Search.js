@@ -25,7 +25,7 @@ const Search = () => {
 		try {
 			const {data} = await axios.get(`${requests.search}${search}`);
 			setResults(data.results.filter(item => item.media_type !== 'person' ));
-			console.log(data.results.filter(item => item.media_type !== 'person' ));
+			if(data.results.filter(item => item.media_type !== 'person' ).length < 1) setError('Sorry we could not find any related content');
 			setLoading(false);
 			return data;
 		} catch	(err) {

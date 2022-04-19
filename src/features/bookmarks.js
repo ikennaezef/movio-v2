@@ -6,9 +6,11 @@ export const bookmarkSlice = createSlice({
 	reducers: {
 		addBookmark: (state, action) => {
 			state.bookmarksList.push(action.payload);
+			console.log('Bookmark added');
 		},
 		deleteBookmark: (state, action) => {
-			state.bookmarksList = state.bookmarksList.filter(bookmark => action.payload !== bookmark.id);
+			state.bookmarksList = state.bookmarksList.filter(bookmark => action.payload === bookmark);
+			console.log('Bookmark removed');
 		}
 	}
 })

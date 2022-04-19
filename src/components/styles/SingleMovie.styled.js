@@ -41,6 +41,11 @@ export const Bookmark = styled.span`
 	&:hover {
 		background: ${({theme}) =>theme.darkBg};
 	}
+
+	@media (max-width: 375px) {
+		bottom: 0.5rem;
+		right: 0.2rem;
+	}
 `;
 
 export const Badge = styled.span`
