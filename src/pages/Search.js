@@ -56,8 +56,8 @@ const Search = () => {
 				{ loading && <Loader/> }
 				{ error && <Error> {error} </Error> }
 				<Grid>
-				{ results &&
-					results.map(movie => <SingleMovie key={movie.id} movie={movie} type={movie.media_type==='tv' ? 'TV Show' : 'Movie'} />)
+				{ results && !loading &&
+					results.map(movie => <SingleMovie key={movie.id} movie={movie} type={movie.media_type} />)
 				}
 				</Grid>
 			</Container>

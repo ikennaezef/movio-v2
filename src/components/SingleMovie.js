@@ -22,6 +22,8 @@ const SingleMovie = ({movie, type}) => {
 
 	const selectMovie = () => {
 		navigate(`/${type}/${movie.id}`);
+
+		console.log(type);
 	}
 
 	return (

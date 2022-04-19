@@ -94,8 +94,15 @@ export const Pill = styled.span`
 
 export const ButtonGroup = styled.div`
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: flex-start;
 	margin-top: 1rem;
+
+	@media (max-width: 376px) {
+		button, a {
+			width: 100%;
+		}
+	}
 `;
 
 export const BookMarkBtn = styled(Button)`
