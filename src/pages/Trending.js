@@ -16,6 +16,8 @@ import { useSelector } from 'react-redux';
 
 const Trending = () => {
 
+	const savedBookmarks = useSelector(state => state.bookmarks.bookmarksList);
+
 	const [results, setResults] = useState([]);
 	const [pageNumber, setPageNumber] = useState(1);
 	const [totalPages, setTotalPages] = useState();
@@ -37,9 +39,6 @@ const Trending = () => {
 			setLoading(false);
 		}			
 	}
-
-	const savedBookmarks = useSelector(state => state.bookmarks.bookmarksList);
-
 
 	useEffect(() => {
 		window.scroll(0, 0);

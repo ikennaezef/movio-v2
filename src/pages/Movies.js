@@ -21,6 +21,7 @@ const Movies = () => {
 
 	const dispatch = useDispatch();
 	const gen = useSelector((state) => state.genre.value);
+	const savedBookmarks = useSelector(state => state.bookmarks.bookmarksList);
 
 	const [results, setResults] = useState([]);
 	const [pageNumber, setPageNumber] = useState(1);
@@ -76,6 +77,11 @@ const Movies = () => {
 		setPageNumber(selected + 1);
 	}
 
+	const checkSaved = (m) => {
+		const arr = savedBookmarks.filter(bk => bk.id === m.id);
+		return arr.length > 0;
+	}
+
 	return (
 		<>
 			<Container>
@@ -85,7 +91,7 @@ const Movies = () => {
 				{ error ? <Error>{ error }</Error> : <Genres genreList={genresList} /> }
 				<Grid>
 				{ results && !loading &&
-					results.map(movie => <SingleMovie key={movie.id} movie={movie} type="movie"/>)
+					results.map(movie => <SingleMovie key={movie.id} movie={movie} saved={checkSaved(movie)} type="movie"/>)
 				}
 				</Grid>
 				{ !error && 

@@ -60,6 +60,7 @@ const SinglePage = () => {
 	}
 
 	const handleSimilar = (id) => {
+		setMovie(null);
 		navigate(`/${type}/${id}`);
 	}
 

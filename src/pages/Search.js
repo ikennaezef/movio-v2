@@ -3,6 +3,8 @@ import { useState } from 'react';
 import axios from '../axios';
 import requests from '../requests';
 
+import {useSelector} from 'react-redux';
+
 import {Container, Error} from '../components/styles/Container.styled';
 import {Grid} from '../components/styles/Grid.styled';
 import {SearchBox, Input, Button} from '../components/styles/SearchBox.styled';
@@ -13,6 +15,8 @@ import SingleMovie from '../components/SingleMovie';
 import { FaSearch } from 'react-icons/fa';
 
 const Search = () => {
+
+	const savedBookmarks = useSelector(state => state.bookmarks.bookmarksList);
 
 	const [search, setSearch] = useState('');
 	const [results, setResults] = useState([]);
@@ -43,6 +47,11 @@ const Search = () => {
 		} 
 	}
 
+	const checkSaved = (m) => {
+		const arr = savedBookmarks.filter(bk => bk.id === m.id);
+		return arr.length > 0;
+	}
+
 	return (
 		<>
 			<Container>
@@ -57,7 +66,7 @@ const Search = () => {
 				{ error && <Error> {error} </Error> }
 				<Grid>
 				{ results && !loading &&
-					results.map(movie => <SingleMovie key={movie.id} movie={movie} type={movie.media_type} />)
+					results.map(movie => <SingleMovie key={movie.id} movie={movie} saved={checkSaved(movie)} type={movie.media_type} />)
 				}
 				</Grid>
 			</Container>

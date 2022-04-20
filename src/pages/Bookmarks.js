@@ -1,8 +1,9 @@
+import { useEffect } from 'react';
+
 import {Container} from '../components/styles/Container.styled';
 import {Grid} from '../components/styles/Grid.styled';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { addBookmark, deleteBookmark } from '../features/bookmarks';
+import { useSelector } from 'react-redux';
 
 import SingleMovie from '../components/SingleMovie';
 
@@ -10,13 +11,16 @@ import { BsBookmarkFill } from 'react-icons/bs';
 
 const Bookmarks = () => {
 
-	const dispatch = useDispatch();
 	const savedBookmarks = useSelector(state => state.bookmarks.bookmarksList);
 
 	const checkSaved = (m) => {
 		const arr = savedBookmarks.filter(bk => bk.id === m.id);
 		return arr.length > 0;
 	}
+
+	useEffect(() => {
+		window.scroll(0, 0);
+	}, [])
 
 	return (
 		<>
