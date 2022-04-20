@@ -7,6 +7,7 @@ import theme from './theme';
 
 import Header from './components/Header';
 import Navigation from './components/Navigation';
+import {Toaster} from 'react-hot-toast';
 
 import TrendingPage from './pages/Trending';
 import MoviesPage from './pages/Movies';
@@ -15,12 +16,23 @@ import SearchPage from './pages/Search';
 import BookmarksPage from './pages/Bookmarks';
 import SinglePage from './pages/SinglePage';
 
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
 function App() {
+
+  const savedBookmarks = useSelector(state => state.bookmarks.bookmarksList);
+
+  useEffect(() => {
+    console.log(savedBookmarks);
+  }, [savedBookmarks])
+
   return (
     <Router>
       <ThemeProvider theme={theme} >
           <GlobalStyles />
           <Header />
+          <Toaster />
           <Routes>
             <Route path="/" exact element={ <TrendingPage /> } />
             <Route path="/movies" element={ <MoviesPage /> } />

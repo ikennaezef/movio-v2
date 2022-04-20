@@ -1,19 +1,19 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addBookmark, deleteBookmark } from '../features/bookmarks';
 
-import {Movie, PosterContainer, Poster, Bookmark, Badge, MovieName, Type, Date} from './styles/SingleMovie.styled'
-import toast, { Toaster } from 'react-hot-toast';
+import {Movie, PosterContainer, Poster, Bookmark, Badge, MovieName, Type, Date} from './styles/SingleMovie.styled';
 
 import { noPoster, img_500 } from '../config/config';
 
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 
-const SingleMovie = ({movie, type}) => {
+const SingleMovie = ({movie, type, saved}) => {
 
 	const dispatch = useDispatch();
-	const savedBookmarks = useSelector(state => state.bookmarks.bookmarksList)
+	const savedBookmarks = useSelector(state => state.bookmarks.bookmarksList);
 
 	const navigate = useNavigate();
 
@@ -32,27 +32,25 @@ const SingleMovie = ({movie, type}) => {
 	const selectMovie = (e) => {
 		if (!e.target.classList.contains('bookmark')) {
 			navigate(`/${type}/${movie.id}`);
+		} 
+	}
+
+	const toggleBookmark = (e) => {
+		e.stopPropagation();
+		let arr = savedBookmarks.filter(bk => bk.id === movie.id);
+		if (arr.length > 0) {
+			dispatch(deleteBookmark(movie));
+		} else {
+			dispatch(addBookmark({...movie, type}));
 		}		
 	}
 
-	// const toggleBookmark = () => {
-	// 	if (savedBookmarks.includes(movie)) {
-	// 		dispatch(deleteBookmark(movie));
-	// 		toast('Deleted Bookmark');
-	// 	} else {
-	// 		dispatch(addBookmark(movie));
-	// 		toast('Added Bookmark');
-	// 	}
-	// 	
-	// }
-
 	return (
 		<Movie onClick={selectMovie} >
-			<Toaster />
 			<PosterContainer>
 				<Badge highlyRated={movie.vote_average >= 7} >{movie.vote_average}</Badge>
 				<Poster src={movie.poster_path === null ? noPoster : `${img_500}${movie.poster_path}`} alt={movie.original_name} />
-				<Bookmark className='bookmark' > <BsBookmark className='bookmark' /> </Bookmark>
+				<Bookmark className='bookmark' onClick={toggleBookmark} > { saved ? <BsBookmarkFill className='bookmark' /> : <BsBookmark className='bookmark' /> } </Bookmark>
 			</PosterContainer>
 			<MovieName>{shortenString(movie.name || movie.title) }</MovieName>
 			<Type>{type === 'tv' ? 'TV Show' : 'Movie' }</Type>

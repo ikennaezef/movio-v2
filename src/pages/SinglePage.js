@@ -4,6 +4,9 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from '../axios';
 import { fetchSingleMovie } from '../requests';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { addBookmark, deleteBookmark } from '../features/bookmarks';
+
 import {Container, Error} from '../components/styles/Container.styled';
 import {Button, Grid, PosterContainer, MovieDetails, MovieName, Text, FadedText, Tagline, Plot, Pill, Rating, SimilarLink, ButtonGroup, BookMarkBtn, TrailerBtn} from '../components/styles/SinglePage.styled';
 
@@ -16,6 +19,9 @@ import { FaYoutube } from 'react-icons/fa';
 
 
 const SinglePage = () => {
+
+	const dispatch = useDispatch();
+	const savedBookmarks = useSelector(state => state.bookmarks.bookmarksList);
 
 	const { id, type } = useParams();
 	const navigate = useNavigate();
@@ -57,6 +63,20 @@ const SinglePage = () => {
 		navigate(`/${type}/${id}`);
 	}
 
+	const toggleBookmark = (e) => {
+		e.stopPropagation();
+		let arr = savedBookmarks.filter(bk => bk.id === movie.id);
+		if (arr.length > 0) {
+			dispatch(deleteBookmark(movie));
+		} else {
+			dispatch(addBookmark({...movie, type}));
+		}		
+	}
+
+	const checkSaved = (m) => {
+		const arr = savedBookmarks.filter(bk => bk.id === m.id);
+		return arr.length > 0;
+	}
 	
 
 	return (
@@ -84,9 +104,16 @@ const SinglePage = () => {
 							<Text>Similar : {similar.map(s => <SimilarLink key={s.id} onClick={() => handleSimilar(s.id)} as="span" > { s.title || s.name }, </SimilarLink> )}</Text>
 
 							<ButtonGroup>
-								<BookMarkBtn>
-									<BsBookmark/> Add To Bookmarks
-								</BookMarkBtn>
+								
+
+								{ checkSaved(movie) ?
+									<BookMarkBtn  onClick={toggleBookmark}>
+										<BsBookmarkFill /> Remove from Bookmarks
+									</BookMarkBtn> : 
+									<BookMarkBtn onClick={toggleBookmark}>
+										<BsBookmark /> Add to Bookmarks
+									</BookMarkBtn>
+								}
 
 								{ videos.length > 0 && <TrailerBtn 
 									as="a"

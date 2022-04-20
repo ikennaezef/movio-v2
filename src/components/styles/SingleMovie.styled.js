@@ -28,6 +28,7 @@ export const Poster = styled.img`
 `;
 
 export const Bookmark = styled.span`
+	display: inline-block;
 	border-radius: 50%;
 	height: 2.5rem;
 	width: 2.5rem;
@@ -37,6 +38,11 @@ export const Bookmark = styled.span`
 	bottom: 0.8rem;
 	right: 0.5rem;
 	color: ${({theme}) =>theme.light};
+
+	svg {
+		width: 100%;
+		/*height: 100%;*/
+	}
 
 	&:hover {
 		background: ${({theme}) =>theme.darkBg};

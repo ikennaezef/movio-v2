@@ -12,6 +12,8 @@ import ReactPaginate from 'react-paginate';
 
 import { AiTwotoneFire } from 'react-icons/ai'
 
+import { useSelector } from 'react-redux';
+
 const Trending = () => {
 
 	const [results, setResults] = useState([]);
@@ -36,6 +38,9 @@ const Trending = () => {
 		}			
 	}
 
+	const savedBookmarks = useSelector(state => state.bookmarks.bookmarksList);
+
+
 	useEffect(() => {
 		window.scroll(0, 0);
 		fetchData();
@@ -43,6 +48,11 @@ const Trending = () => {
 
 	const changePage = ({ selected }) => {
 		setPageNumber(selected + 1);
+	}
+
+	const checkSaved = (m) => {
+		const arr = savedBookmarks.filter(bk => bk.id === m.id);
+		return arr.length > 0;
 	}
 
 
@@ -55,7 +65,7 @@ const Trending = () => {
 				{ error && <Error>{ error }</Error> }
 				<Grid>
 				{ results && !loading &&
-					results.map(movie => <SingleMovie key={movie.id} movie={movie} type={movie.media_type}/>)
+					results.map(movie => <SingleMovie key={movie.id} movie={movie} saved={checkSaved(movie)} type={movie.media_type}/>)
 				}
 				</Grid>
 				{ !error && 
