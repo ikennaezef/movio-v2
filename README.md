@@ -15,7 +15,7 @@ This is an application for finding information about movies and TV Shows. It is 
 ### Links
 
 - Solution URL: [Code on GitHub](https://github.com/ikennaezef/movio-v2/)
-- Live Site URL: [Live site URL here](https://movio.netlify.app/)
+- Live Site URL: [Live site URL here](https://movio-v2.netlify.app/)
 
 
 ### Built with
