@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components'; 
@@ -16,16 +17,28 @@ import SearchPage from './pages/Search';
 import BookmarksPage from './pages/Bookmarks';
 import SinglePage from './pages/SinglePage';
 
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fillBookmarks, addBookmark } from './features/bookmarks';
+
 
 function App() {
 
+  const dispatch = useDispatch();
   const savedBookmarks = useSelector(state => state.bookmarks.bookmarksList);
 
-  useEffect(() => {
-    console.log(savedBookmarks);
-  }, [savedBookmarks])
+  const fetchBookmarks = () => {
+    if (localStorage.getItem('savedBookmarks')) {
+      let localBookmarks = JSON.parse(localStorage.getItem('savedBookmarks'));
+      dispatch(fillBookmarks(localBookmarks));
+      console.log(localBookmarks);
+    } else {
+      console.log('Nothing');
+    }
+  }
+
+  useLayoutEffect(() => {
+    fetchBookmarks();
+  }, [])
 
   return (
     <Router>

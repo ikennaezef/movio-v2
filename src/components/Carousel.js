@@ -6,7 +6,6 @@ import { noPicture, img_300 } from '../config/config';
 import { CarouselContainer, CarouselItem, CarouselImage, Name } from './styles/Carousel.styled';
 
 
-
 const Carousel = ({ list }) => {
 
 	const handleDragStart = (e) => e.preventDefault();
@@ -35,14 +34,14 @@ const Carousel = ({ list }) => {
 			{ list &&
 				<AliceCarousel 
 					mouseTracking
-		      		infinite
-		    		disableDotsControls
-		      		disableButtonsControls
-		      		responsive={responsive}
-		      		items={items}
-		      		autoPlay
+		    	infinite
+		    	disableDotsControls
+		    	disableButtonsControls
+		    	responsive={responsive}
+		    	items={items}
+		    	autoPlay
 					autoPlayInterval={1500}
-				 />
+				/>
 			}
 		</CarouselContainer>		
 		
