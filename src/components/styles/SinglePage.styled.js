@@ -34,6 +34,8 @@ export const Grid = styled.div`
 `;
 
 export const PosterContainer = styled.div`
+	width: 100%;
+
 	img {
 		max-width: 100%;
 		border-radius: 0.4rem;
@@ -41,7 +43,7 @@ export const PosterContainer = styled.div`
 `;
 
 export const MovieDetails = styled.div`
-	
+	max-width: 100%;
 `;
 
 export const MovieName = styled.h1`
@@ -67,6 +69,13 @@ export const Tagline = styled(Text)`
 export const Plot = styled(Text)`
 	line-height: 1.5;
 	margin: 1.5rem 0;
+	width: 95%;
+`;
+
+export const Similar = styled(Text)`
+	line-height: 1.5;
+	margin: 1.5rem 0;
+	width: 95%;
 `;
 
 export const Rating = styled.span`
@@ -98,7 +107,7 @@ export const ButtonGroup = styled.div`
 	justify-content: flex-start;
 	margin-top: 1rem;
 
-	@media (max-width: 376px) {
+	@media (max-width: 426px) {
 		button, a {
 			width: 100%;
 		}

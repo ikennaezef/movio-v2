@@ -17,23 +17,19 @@ import SearchPage from './pages/Search';
 import BookmarksPage from './pages/Bookmarks';
 import SinglePage from './pages/SinglePage';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { fillBookmarks, addBookmark } from './features/bookmarks';
+import { useDispatch } from 'react-redux';
+import { fillBookmarks } from './features/bookmarks';
 
 
 function App() {
 
   const dispatch = useDispatch();
-  const savedBookmarks = useSelector(state => state.bookmarks.bookmarksList);
 
   const fetchBookmarks = () => {
     if (localStorage.getItem('savedBookmarks')) {
       let localBookmarks = JSON.parse(localStorage.getItem('savedBookmarks'));
       dispatch(fillBookmarks(localBookmarks));
-      console.log(localBookmarks);
-    } else {
-      console.log('Nothing');
-    }
+    } 
   }
 
   useLayoutEffect(() => {

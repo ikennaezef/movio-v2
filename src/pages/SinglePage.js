@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addBookmark, deleteBookmark } from '../features/bookmarks';
 
 import {Container, Error} from '../components/styles/Container.styled';
-import {Button, Grid, PosterContainer, MovieDetails, MovieName, Text, FadedText, Tagline, Plot, Pill, Rating, SimilarLink, ButtonGroup, BookMarkBtn, TrailerBtn} from '../components/styles/SinglePage.styled';
+import {Button, Grid, PosterContainer, MovieDetails, MovieName, Text, FadedText, Tagline, Plot, Pill, Rating, Similar, SimilarLink, ButtonGroup, BookMarkBtn, TrailerBtn} from '../components/styles/SinglePage.styled';
 
 import Loader from '../components/Loader';
 import Carousel from '../components/Carousel';
@@ -102,7 +102,7 @@ const SinglePage = () => {
 
 							{actors && <Carousel list={actors.slice(0,9)} />}
 
-							<Text>Similar : {similar.map(s => <SimilarLink key={s.id} onClick={() => handleSimilar(s.id)} as="span" > { s.title || s.name }, </SimilarLink> )}</Text>
+							<Similar>Similar : {similar.map(s => <SimilarLink key={s.id} onClick={() => handleSimilar(s.id)} as="span" > { s.title || s.name }, </SimilarLink> )}</Similar>
 
 							<ButtonGroup>
 								

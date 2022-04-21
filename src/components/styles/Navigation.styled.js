@@ -10,7 +10,7 @@ export const StyledNav = styled.nav`
 	z-index: 100;
 
 	@media (max-width: 370px) {
-		padding: 1rem 0.5rem;
+		padding: 1rem 0.3rem;
 	}
 `;
 
