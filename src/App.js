@@ -1,14 +1,14 @@
 import { useLayoutEffect } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { ThemeProvider } from 'styled-components'; 
+import { ThemeProvider } from 'styled-components';
 import './App.css';
 import { GlobalStyles } from './components/styles/GlobalStyles'
 import theme from './theme';
 
 import Header from './components/Header';
 import Navigation from './components/Navigation';
-import {Toaster} from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 import TrendingPage from './pages/Trending';
 import MoviesPage from './pages/Movies';
@@ -29,7 +29,7 @@ function App() {
     if (localStorage.getItem('savedBookmarks')) {
       let localBookmarks = JSON.parse(localStorage.getItem('savedBookmarks'));
       dispatch(fillBookmarks(localBookmarks));
-    } 
+    }
   }
 
   useLayoutEffect(() => {
@@ -39,18 +39,18 @@ function App() {
   return (
     <Router>
       <ThemeProvider theme={theme} >
-          <GlobalStyles />
-          <Header />
-          <Toaster />
-          <Routes>
-            <Route path="/" exact element={ <TrendingPage /> } />
-            <Route path="/movies" element={ <MoviesPage /> } />
-            <Route path="/tvshows" element={ <TVShowsPage /> } />
-            <Route path="/search" element={ <SearchPage /> } />
-            <Route path="/bookmarks" element={ <BookmarksPage /> } />
-            <Route path="/:type/:id" element={ <SinglePage /> } />
-          </Routes>
-          <Navigation />
+        <GlobalStyles />
+        <Header />
+        <Toaster />
+        <Routes>
+          <Route path="/" exact element={<TrendingPage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/tvshows" element={<TVShowsPage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/bookmarks" element={<BookmarksPage />} />
+          <Route path="/:type/:id" element={<SinglePage />} />
+        </Routes>
+        <Navigation />
       </ThemeProvider>
     </Router>
   );
